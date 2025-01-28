@@ -2,7 +2,9 @@
   <h1>To-do Application</h1>
 
   <hr />
-  <form id="submitForm"(ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+
+  <!--Inicio da lista de tarefas-->
+  <form id="submitForm" (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
     <div class="form-group">
       <label for="tarefa">Coisas a fazer</label>
 
@@ -23,10 +25,11 @@
         id="errorMessage"
         class="form-text text-danger"
       >
-        Campo obrigatório
-      </small>
+        Campo obrigatório</small
+      >
     </div>
 
+    <!--Botão para submeter a tarefa na lista de tarefas-->
     <button
       [disabled]="taskForm.invalid"
       type="submit"
@@ -35,40 +38,47 @@
     >
       Submit
     </button>
-<!--Botão para deletar tudo do formulario-->
-    <button
-    id="deleteAll"
-    type="button"
-    class="btn btn-danger"
-    id="deleteAll"
-    (click)=" deleteAll(taskArray)"
-  > Delete All </button>
 
+    <!--Botão para deletar tudo do formulario-->
+    <button
+      id="deleteAll"
+      type="button"
+      class="btn btn-danger"
+      id="deleteAll"
+      (click)="deleteAll(taskArray)"
+    >
+      Delete All
+    </button>
+
+    <!--Colunas das tabelas-->
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Tarefa</th>
           <th scope="col">Completa</th>
           <th scope="col">Deletar</th>
-          <th scope="col">Editar </th>
+          <th scope="col">Editar</th>
           <th scope="col">Salvar</th>
-          
         </tr>
       </thead>
-      
+
+      <!--Um 'laço' para criar novas linhas com as novas tarefas salvas-->
       <tbody>
         <tr *ngFor="let t of taskArray; index as i">
+          <!--Uma nova linha com a nova tarefa que foi submetida-->
           <td>
             <input
-        #taskInput
-        type="text"
-        class="form-control"
-        id="tarefa"
-        value="{{ t.taskName }}"
-        [readOnly]="!t.isEditable"
-      />
-            
-            </td>
+              #taskInput
+              type="text"
+              class="form-control"
+              id="tarefa"
+              value="{{ t.taskName }}"
+              [readOnly]="!t.isEditable"
+              [ngClass]="{ 'text-strike': t.isCompleted }"
+            />
+          </td>
+
+          <!--Uma caixa 'checkbox' para a nova tarefa-->
           <td>
             <input
               type="checkbox"
@@ -77,36 +87,42 @@
             />
           </td>
 
+          <!--Botão de deletar tarefa-->
           <td>
-            <!--Botão de deletar tarefa-->
             <button
               id="deletBtn"
               type="button"
               class="btn btn-danger btn-sm"
               (click)="onDelete(i)"
-            > Deletar</button>
-
+            >
+              Deletar
+            </button>
           </td>
+
+          <!--Botão de editar tarefa-->
           <td>
-            
-            <!--Botão de editar tarefa-->
             <button
               id="editBtn"
               type="button"
               class="btn btn-primary btn-sm"
               (click)="onEdit(i)"
               [disabled]="t.isEditable"
-            > Editar </button>
+            >
+              Editar
+            </button>
           </td>
+
+          <!--Botão de salvar tarefa editada-->
           <td>
-             <!--Botão de salvar tarefa editada-->
-             <button
-             id="saveBtn"
-             type="button"
-             class="btn btn-warning btn-sm"
-             (click)="onSave(i, taskInput.value)"
-             [disabled]="!t.isEditable"
-           > Salvar</button>
+            <button
+              id="saveBtn"
+              type="button"
+              class="btn btn-warning btn-sm"
+              (click)="onSave(i, taskInput.value)"
+              [disabled]="!t.isEditable"
+            >
+              Salvar
+            </button>
           </td>
         </tr>
       </tbody>

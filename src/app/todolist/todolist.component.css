@@ -18,13 +18,17 @@ h1 {
 #saveBtn {
   align-items: center;
 }
-#tarefa{
+#tarefa {
   max-width: 150vh;
 }
-#submitForm{
+#submitForm {
   margin-top: 40px;
 }
-#deleteAll{
+#deleteAll {
   margin-top: 2vh;
   margin-left: 1vh;
+}
+.text-strike {
+  text-decoration: line-through;
+  color: gray;
 }
