@@ -1,0 +1,115 @@
+<div class="container">
+  <h1>To-do Application</h1>
+
+  <hr />
+  <form id="submitForm"(ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+    <div class="form-group">
+      <label for="tarefa">Coisas a fazer</label>
+
+      <!-- Campo de texto do projeto -->
+      <input
+        type="text"
+        class="form-control"
+        id="tarefa"
+        placeholder="O que tenho que fazer hoje...."
+        ngModel
+        name="tarefa"
+        required
+      />
+
+      <!-- Mensagem de erro -->
+      <small
+        *ngIf="taskForm.invalid"
+        id="errorMessage"
+        class="form-text text-danger"
+      >
+        Campo obrigatório
+      </small>
+    </div>
+
+    <button
+      [disabled]="taskForm.invalid"
+      type="submit"
+      class="btn btn-primary"
+      id="submitBtn"
+    >
+      Submit
+    </button>
+<!--Botão para deletar tudo do formulario-->
+    <button
+    id="deleteAll"
+    type="button"
+    class="btn btn-danger"
+    id="deleteAll"
+    (click)=" deleteAll(taskArray)"
+  > Delete All </button>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Tarefa</th>
+          <th scope="col">Completa</th>
+          <th scope="col">Deletar</th>
+          <th scope="col">Editar </th>
+          <th scope="col">Salvar</th>
+          
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr *ngFor="let t of taskArray; index as i">
+          <td>
+            <input
+        #taskInput
+        type="text"
+        class="form-control"
+        id="tarefa"
+        value="{{ t.taskName }}"
+        [readOnly]="!t.isEditable"
+      />
+            
+            </td>
+          <td>
+            <input
+              type="checkbox"
+              (change)="onCheck(i)"
+              [checked]="t.isCompleted"
+            />
+          </td>
+
+          <td>
+            <!--Botão de deletar tarefa-->
+            <button
+              id="deletBtn"
+              type="button"
+              class="btn btn-danger btn-sm"
+              (click)="onDelete(i)"
+            > Deletar</button>
+
+          </td>
+          <td>
+            
+            <!--Botão de editar tarefa-->
+            <button
+              id="editBtn"
+              type="button"
+              class="btn btn-primary btn-sm"
+              (click)="onEdit(i)"
+              [disabled]="t.isEditable"
+            > Editar </button>
+          </td>
+          <td>
+             <!--Botão de salvar tarefa editada-->
+             <button
+             id="saveBtn"
+             type="button"
+             class="btn btn-warning btn-sm"
+             (click)="onSave(i, taskInput.value)"
+             [disabled]="!t.isEditable"
+           > Salvar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

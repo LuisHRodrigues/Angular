@@ -1,0 +1,30 @@
+h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+#deletBtn {
+  align-items: center;
+}
+#submitBtn {
+  margin-top: 2vh;
+}
+#myCheckbox {
+  margin-left: 3vw;
+}
+
+#editBtn {
+  align-items: center;
+}
+#saveBtn {
+  align-items: center;
+}
+#tarefa{
+  max-width: 150vh;
+}
+#submitForm{
+  margin-top: 40px;
+}
+#deleteAll{
+  margin-top: 2vh;
+  margin-left: 1vh;
+}
